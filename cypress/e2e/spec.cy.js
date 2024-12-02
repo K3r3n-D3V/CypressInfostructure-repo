@@ -29,6 +29,8 @@ describe("Login and Place Order", () => {
 
   it("should place an order successfully", () => {
     // Step 1: Navigate to the product screen
+        cy.url().should('include', '/cart'); // Verify cart URL
+
     cy.contains('button', "Back to Product Screen").click();
     
     
