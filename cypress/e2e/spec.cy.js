@@ -25,6 +25,11 @@ describe("Login and Place Order", () => {
       cy.get('button[type="submit"]').should('be.visible'); // Submit button visible
       // Step 3: Click login button to log in
       cy.get('button[type="submit"]').click();
+
+    cy.on('window:alert', (str) => {
+    cy.contains("Welcome!!! ").should('exist');
+    expect(str).to.equal('Welcome!!! ');
+  });
   });
 
   it("should place an order successfully", () => {
