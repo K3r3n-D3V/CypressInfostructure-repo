@@ -48,7 +48,7 @@ describe("Login and Place Order", () => {
     cy.get('.addToCartBtn').should('contain', 'Add To Cart').and('be.visible');
 
     // Step 3: Navigate to the cart page
-    cy.get('#product-cart-icon')
+    cy.get('.cart-icon')
       .should('be.visible') // Ensure cart icon is visible
       .click();
     cy.url().should('include', '/cart'); // Verify cart URL
