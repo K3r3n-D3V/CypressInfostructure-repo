@@ -4,7 +4,7 @@ describe("Login and Place Order", () => {
     cy.visit("/");
 
     // Step 1: Click the login button in the navbar on the home page
-    cy.contains("button", "Login").click();
+    cy.get(".cart-icon").click(); 
     cy.url().should('include', '/login'); // Verify login URL
 
     // Step 2: Fill in user credentials to log in
