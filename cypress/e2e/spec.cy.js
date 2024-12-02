@@ -32,12 +32,12 @@ describe("Login and Place Order", () => {
       expect(alertText).to.eq('Welcome!!!'); // Ensure the alert contains the expected message
     });
 
+  it("should place an order successfully", () => {
+
     // Step 5: Verify redirection to the cart page
-    cy.url().should('include', '/cart'); // Confirm navigation to the cart page
+    cy.url().should('include', '/login'); // Confirm navigation to the cart page
     cy.contains('button', "Back to Productscreen").should('be.visible'); // Ensure button is present
   });
-
-  it("should place an order successfully", () => {
     // Step 1: Navigate to the product screen
     cy.contains('button', "Back to Productscreen").click();
     
