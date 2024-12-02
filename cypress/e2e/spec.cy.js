@@ -16,6 +16,7 @@ describe("Login and Place Order", () => {
       .should('be.visible') // Ensure password input is visible
       .type("12345");
 
+    
     // Login Assertions
     cy.get('h2').should('contain', 'Login'); // Page heading
     cy.get('label').should('contain', 'Email Address'); 
