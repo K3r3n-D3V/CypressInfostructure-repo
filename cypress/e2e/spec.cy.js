@@ -1,9 +1,9 @@
 describe("Login and Place Order", () => {
   beforeEach(() => {
     // Navigate to the home page
-    cy.visit("/");
+    cy.visit("/"); 
 
-    // Step 1: Click the login button in the navbar on the home page
+    // Step 1: Click the cart icon in the navbar on the home page
     cy.get(".cart-icon").click(); 
     cy.url().should('include', '/login'); // Verify login URL
 
@@ -16,27 +16,29 @@ describe("Login and Place Order", () => {
       .should('be.visible') // Ensure password input is visible
       .type("12345");
 
-      
-      // Login Assertions
-      cy.get('h2').should('contain', 'Login'); // Page heading
-      cy.get('label').should('contain', 'Email Address'); 
-      cy.get('label').should('contain', 'Password'); 
-      cy.get('p').should('contain', 'Do not have an account? Sign Up'); 
-      cy.get('button[type="submit"]').should('be.visible'); // Submit button visible
-      // Step 3: Click login button to log in
-      cy.get('button[type="submit"]').click();
+    // Login Assertions
+    cy.get('h2').should('contain', 'Login'); // Page heading
+    cy.get('label').should('contain', 'Email Address'); 
+    cy.get('label').should('contain', 'Password'); 
+    cy.get('p').should('contain', 'Do not have an account? Sign Up'); 
+    cy.get('button[type="submit"]').should('be.visible'); // Submit button visible
 
-    cy.on('window:alert', (str) => {
-    cy.contains("Welcome!!! ").should('exist');
-    expect(str).to.equal('Welcome!!! ');
-  });
+    // Step 3: Click login button to log in
+    cy.get('button[type="submit"]').click();
+
+    // Step 4: Assert welcome alert
+    cy.on('window:alert', (alertText) => {
+      expect(alertText).to.eq('Welcome!!!'); // Ensure the alert contains the expected message
+    });
+
+    // Step 5: Verify redirection to the cart page
+    cy.url().should('include', '/cart'); // Confirm navigation to the cart page
+    cy.contains('button', "Back to Productscreen").should('be.visible'); // Ensure button is present
   });
 
   it("should place an order successfully", () => {
     // Step 1: Navigate to the product screen
-
-    cy.contains('button', "Back to Product Screen").click();
-    
+    cy.contains('button', "Back to Productscreen").click();
     
     // Product Screen Assertions
     cy.get('.product').should('have.length.at.least', 1); // Ensure products are displayed
@@ -71,7 +73,7 @@ describe("Login and Place Order", () => {
     cy.get('.increase').eq(2).should('contain', '+');
 
     // Step 5: Select shipping method
-    cy.get('select[name="deliveryMethod"]').select('Express Delivery - $25').should('have.value', 'Express Delivery');;
+    cy.get('select[name="deliveryMethod"]').select('Express Delivery - $25').should('have.value', 'Express Delivery');
 
     // Step 6: Click Proceed to Checkout
     cy.contains("button", "Proceed to Checkout").click();
