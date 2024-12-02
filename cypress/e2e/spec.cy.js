@@ -67,7 +67,10 @@ describe("Login and Place Order", () => {
     cy.get('.increase').eq(2).should('contain', '+');
 
     // Step 5: Select shipping method
-    cy.get('select[name="deliveryMethod"]').select('Express Delivery - $25').should('have.value', 'Express Delivery');;
+    // cy.get('select[name="deliveryMethod"]').select('Express Delivery - $25').should('have.value', 'Express Delivery');;
+    cy.get('select[name="deliveryMethod"]').select('Standard Delivery');
+    cy.get('select[name="deliveryMethod"]').should('have.value', 'Standard Delivery');
+
 
     // Step 6: Click Proceed to Checkout
     cy.contains("button", "Proceed to Checkout").click();
